@@ -1,13 +1,4 @@
-//-----------------UI-----------------------------
-//element variables
-
-//event listeners
-
-
-
-
-
-//-------------Console Log Version:--------------------
+//classes
 //Troops:
 class Troop{
     name = "";
@@ -37,6 +28,7 @@ class Troop{
         return this.spawnType;
     }
 }
+
 //Strongholds:
 class Stronghold{
 
@@ -153,6 +145,9 @@ class Stronghold{
 
     //method for changing SH ownership
     conquerSH(faction, wzpPercent){
+        //save reference to the element for this SH
+        let sh = document.getElementById(this.name);
+        //selectedSH = document.getElementById(this.name);
         //set wzpmultiplier
         this.setWzpMultiplier(wzpPercent);
         //capitalise first letter
@@ -166,37 +161,48 @@ class Stronghold{
         //message that is returned
         let message = "";
 
+        //first, make sure it is not associated with any faction
+        sh.classList.remove('drag');
+        sh.classList.remove('phx');
+        sh.classList.remove('ek');
+
         //switch statement for each faction
         switch(faction){
             case "Dragon":
                 console.log("["+faction+" has conquered "+this.getName()+"]");
                 message = "["+faction+" has conquered "+this.getName()+"]";
                 this.owner = faction;
+                sh.classList.add('drag');
                 break;
 
             case "Phoenix":
                 console.log("["+faction+" has conquered "+this.getName()+"]");
                 message = "["+faction+" has conquered "+this.getName()+"]";
                 this.owner = faction;
+                sh.classList.add('phx');
                 break;
 
             case "Evil King":
                 console.log("["+this.getName()+" has reverted to Evil King]");
                 message = "["+this.getName()+" has reverted to Evil King";
                 this.owner = faction;
+                sh.classList.add('ek');
                 break;
 
             default:
                 console.log("Invalid Faction name. Current factions: Dragon, Phoenix, Evil King.");
                 message ="Invalid Faction name. Current factions: Dragon, Phoenix, Evil King.";
         }
+        //update display with message
+        notifications.textContent = message; 
         //calc the new spawn and then display message
         this.calcSpawnSize();
-        return message;       
+        //return message;  
+
     }
 
     //method to display the spawn of a SH
-    displaySPawn(){
+    displaySpawn(){
         console.log("Stronghold spawn: \n");
 
         for(let troop of this.Troops){
@@ -215,7 +221,7 @@ class Stronghold{
         console.log("Owner: "+this.getOwner());
         //wzp total for each faction
         console.log(this.wzp(this.getOwner()));
-        this.displaySPawn();
+        this.displaySpawn();
     }
 
     getShinfo(){
@@ -232,6 +238,7 @@ class Stronghold{
             s+=troop.getSpawnSize().toLocaleString('en-US');
             s+=" \t\t("+troop.getSpawnType()+" spawn)\n";
         }
+        //infoP.textContent = s;
         return s;
     }
 
@@ -264,6 +271,137 @@ class Stronghold{
         this.wzpMultiplier = wzpPercentage/100;
     }
 }
+
+
+//variables
+let wzCreated = false;
+//array that will store strongholds
+let strongholds = [];
+//create the warzone
+createWz();
+
+//element variables
+const notifications = document.getElementById('notifications');
+const infoP = document.getElementById('infoP');
+const changeOwnerMenu = document.getElementById('owner');
+const changeOwnerBtn = document.getElementById('change-owner');
+const resetBtn = document.getElementById('reset-wz');
+//store reference to last selected element. Initialise at sh1
+let selectedSH = document.getElementById('Stronghold 1');
+
+
+//event listeners
+changeOwnerBtn.addEventListener('click', updateSH);
+resetBtn.addEventListener('click', resetWz);
+
+
+
+//function that selects the sh that was clicked on
+//and displays the relevant info below
+function selectSH(){
+    
+    selectedSH = document.getElementById(this.id);
+    
+    let id = selectedSH.getAttribute('id');
+    console.log(`currently selecting ${selectedSH.id}`);
+    let index = id.substring(id.length-1);
+    sh = strongholds[index-1];
+
+    //strongholds[index-1].getShWzp();
+    //infoP.textContent = strongholds[index-1].getShinfo();
+
+    //calculate the WZP that will be displayed in the sector
+    let dragonWzp = 0;
+    let phoenixWzp = 0;
+    let faction = sh.getOwner();
+    if(faction === "Dragon"){
+        dragonWzp = sh.shWzp*sh.wzpMultiplier;
+        phoenixWzp = sh.shWzp - dragonWzp;
+    }else if(faction === "Phoenix"){
+        phoenixWzp = sh.shWzp*sh.wzpMultiplier;
+        dragonWzp = sh.shWzp - phoenixWzp;
+    }
+
+    //sh name
+    infoP.innerHTML = sh.getName();
+    infoP.innerHTML += '<br><br>';
+    //sh owner
+    infoP.innerHTML += sh.getOwner();
+    infoP.innerHTML += '<br><br>';
+    //sh wzp
+    infoP.innerHTML += "Forces: <br>";
+    infoP.innerHTML += `Dragon: ${dragonWzp}<br>`;
+    infoP.innerHTML += `Phoenix: ${phoenixWzp}<br>`;
+    //if it has been reset to EK, show EK wzp
+    if(sh.getOwner()==="Evil King"){
+        infoP.innerHTML +=`Evil King: ${sh.shWzp}<br>`;
+    }
+
+    //sh spawn
+    infoP.innerHTML += '<hr>';
+    infoP.innerHTML +=`<br><br>Stronghold Spawn:<br><br>`;
+    for(let troop of sh.Troops){
+        infoP.innerHTML+=`${troop.getName()}
+        ${troop.getSpawnSize().toLocaleString('en-US')}          
+        (${troop.getSpawnType()} spawn)<br>`;
+    }
+
+}
+
+function updateSH(){
+    
+    //locate the sh in the strongholds array and store a reference to it
+    let id = selectedSH.getAttribute('id');
+    let index = id.substring(id.length-1);
+    sh = strongholds[index-1];
+    //conquer it
+    let wzp = document.getElementById('wzp').value;
+    sh.conquerSH(changeOwnerMenu.value, wzp);
+    //click the button with .click() to select it again and show updated info
+    document.getElementById(id).click();
+}
+
+//function used to create a Warzone of 9 sectors
+function createWz(cols){
+    if(wzCreated){
+        //if it already exists, do nothing
+        return;
+    }
+
+    //create a grid of 9 square sectors
+    for(let i=1; i<=9; i++){
+        //create divs, give them an id and class
+        let name = `Stronghold `+i;
+        console.log('making sectors');
+        btn = document.createElement('button');
+        btn.setAttribute('id', 'Stronghold '+i);
+        btn.setAttribute('name', name);
+        btn.textContent = `${btn.getAttribute('name')}`;
+        btn.classList.add('sector-item');
+        //initially all sectors
+        btn.classList.add('ek');
+        strongholds[i-1] = new Stronghold(name);
+        btn.addEventListener('click', selectSH);
+
+        //style
+        //btnsetAttribute('style', `width:${sqSize}vw;height:${sqSize}vw;background-color:gray;`);
+
+        //add eventListener for hovering
+        //div.addEventListener('mouseover', hoverFunction);
+
+        //add them to the main div
+        mainDiv.appendChild(btn);
+    }
+    wzCreated = true;
+}
+
+function resetWz(){
+    location.reload();
+}
+
+
+
+
 
 
 

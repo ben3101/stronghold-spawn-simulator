@@ -1,0 +1,54 @@
+body{
+    margin: 10%;
+ }
+ 
+ .grid-container{
+    margin-top:10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 60.5vw;
+    max-height: 60.5vw;
+    background-color:black;
+    gap:0.25vw;
+    border:0.25vw solid black;
+ }
+ 
+ .colour-div{
+    display:flex;
+ }
+ .sector-item{
+    width: 20vw;
+    height: 20vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .ek{
+
+    background-color:brown;
+ }
+
+ .drag{
+
+    background-color:green;
+ }
+
+ .phx{
+
+    background-color:red;
+ }
+ 
+ #infoDiv p{
+    max-width: 60.5vw;
+    border:0.25vw solid black;
+ }
+ 
+
+ 
+ /*
+ .grid-item:hover{
+     background-color: darkgray;
+ }
+ */
+ 

@@ -9,14 +9,47 @@
     <script src="javascript.js" defer></script>
 </head>
 <body>
-    <h1>Warzone</h1>
+<div id="wholeDiv">
+    <h1><u>Stronghold Spawn Simulator</u></h1>
+    <p>This app can be used to simulate Stronghold spawns using the following rules:</br></br>
+        - A Stronghold spawn is determined by the % of WarZone Points a faction owns. A higher % results in a stronger SH spawn.</br>
+        - A Stronghold will determine sector ownership: own the SH to control the sector.</br>
+        - Evil King strongholds contain a large amount of wall defences.
+    </p>
 
-    <p>[Warzone Initialised]</p>
+    <p id="notifications" style="background-color:orange">[Warzone Initialised]</p>
+    <!-- inputs -->
+    <form>
+        <label for="owner">Change Owner: </label>
+        <select name="ownerSelect" size="1" id="owner">
+            <option value="dragon">Dragon</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="evil king">Evil King</option>
+        </select>
+        <form>
+        <label for="wzp">Warzone Point %: </label>
+        <input type="number" max="100" id="wzp" value="50"></input>
+        </form>
+        <!--<input type="submit" value="Update Owner"></input>-->
+        <button id="change-owner">Update Owner</button>
+        <button id="reset-wz">Reset Warzone</button>
+    </form>
+    
+    <div id="mainDiv" class="grid-container">
+        <!--the WZ will go in here-->
+    </div>
+    <div id="infoDiv">
+        <p id="infoP">zzzzzzz</p>
+    </div>
+</div>
+    
+    
+<!--
     <button id="change-pixels">Change Grid Pixels</button>
     <button id="clear-pixels">Clear Grid</button>
     <button id="change-bg">Update Background Colour</button>
     <div id="mainDiv" class="grid-container">
-        <!--the grid will go in here-->
+        the grid will go in here
     </div>
     <div id="colourPallete" class="colour-div">
         <label for="colourPicker">Current colour: </label><form>
@@ -26,5 +59,6 @@
             <input type="color" id="bg-colour" name="bg-colour"></input>
         </form>
     </div>
+-->
 </body>
 </html>
