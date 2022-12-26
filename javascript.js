@@ -293,6 +293,16 @@ let selectedSH = document.getElementById('Stronghold 1');
 //event listeners
 changeOwnerBtn.addEventListener('click', updateSH);
 resetBtn.addEventListener('click', resetWz);
+//add event listener to prevent the screen reloading when
+//enter is pressed.
+document.addEventListener('keydown', function(e){
+    //check if enter was pressed
+    if(e.keyCode == 13){
+        //don't do anything
+        e.preventDefault();
+    }
+});
+
 
 
 

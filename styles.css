@@ -1,8 +1,29 @@
 body{
-    margin: 10%;
+    margin: 5%;
     font-size:1em;
  }
- 
+ #wholeDiv{
+   display:flex;
+   flex-direction: column;
+   max-width: 610px;
+ }
+button{
+   font-size: 1em;
+}
+#buttonsDiv{
+   display:flex;
+   justify-content: space-between;
+}
+button #change-owner{
+   display:flex;
+   align-self:flex-start;
+
+}
+button #reset-wz{
+   display:flex;
+   align-self:flex-end
+}
+
  .grid-container{
     margin-top:10px;
     display: flex;
@@ -10,10 +31,15 @@ body{
     flex-wrap: wrap;
     max-width: 60.5vw;
     max-height: 60.5vw;
+    /* max-width: 605px;
+    max-height: 605px; */
     background-color:black;
     gap:0.25vw;
     border:0.25vw solid black;
+    /* gap:2.5px;
+    border:2.5px solid black; */
  }
+
  
 .myform{
    margin-bottom:20px;
@@ -25,6 +51,8 @@ body{
  .sector-item{
     width: 20vw;
     height: 20vw;
+    /* width:200px;
+    height:200px; */
     display:flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +75,8 @@ body{
  #infoDiv p{
     max-width: 60.5vw;
     border:0.25vw solid black;
+    /* max-width: 605px;
+    border:2.5px solid black; */
  }
  
 
