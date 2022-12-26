@@ -6,7 +6,7 @@ body{
  #wholeDiv{
    display:flex;
    flex-direction: column;
-   max-width: 61vw;
+   max-width: 76vw;
  }
  /*
 button{
@@ -32,8 +32,8 @@ button #reset-wz{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 60.5vw;
-    max-height: 60.5vw;
+    max-width: 76.5vw;
+    max-height: 76.5vw;
     /* max-width: 605px;
     max-height: 605px; */
     background-color:black;
@@ -52,8 +52,8 @@ button #reset-wz{
 }
 
  .sector-item{
-    width: 20vw;
-    height: 20vw;
+    width: 25vw;
+    height: 25vw;
     /* width:200px;
     height:200px; */
     font-weight: bolder;
@@ -78,7 +78,7 @@ button #reset-wz{
  }
  
  #infoDiv p{
-    max-width: 60.5vw;
+    max-width: 76vw;
     border:0.25vw solid black;
     background-color: black;
     color:antiquewhite;

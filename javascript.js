@@ -355,7 +355,7 @@ function selectSH(){
 
     //sh spawn
     infoP.innerHTML += '<hr>';
-    infoP.innerHTML +=`<br><br>Stronghold Spawn:<br><br>`;
+    infoP.innerHTML +=`<br>Stronghold Spawn:<br><br>`;
     for(let troop of sh.Troops){
         infoP.innerHTML+=`${troop.getName()}
         ${troop.getSpawnSize().toLocaleString('en-US')}          
