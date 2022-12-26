@@ -62,6 +62,12 @@ class Stronghold{
         this.owner = "Evil King";
         this.wzpMultiplier = 1;
         this.calcSpawnSize();
+        //middle sectors should have double wzp
+        if(this.name==="Stronghold 2" ||
+        this.name==="Stronghold 5" ||
+        this.name==="Stronghold 8"){
+            this.shWzp = 1000000;
+        }
     }
 
     // SH methods
@@ -184,7 +190,7 @@ class Stronghold{
 
             case "Evil King":
                 console.log("["+this.getName()+" has reverted to Evil King]");
-                message = "["+this.getName()+" has reverted to Evil King";
+                message = "["+this.getName()+" has reverted to Evil King]";
                 this.owner = faction;
                 sh.classList.add('ek');
                 break;
