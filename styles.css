@@ -4,6 +4,9 @@ body{
     background-color: darkolivegreen;
     color:cyan;
  }
+button{
+    color:"black";
+}
 
  #wholeDiv{
    display:flex;
