@@ -1,5 +1,6 @@
 body{
     margin: 10%;
+    font-size:1em;
  }
  
  .grid-container{
@@ -14,9 +15,13 @@ body{
     border:0.25vw solid black;
  }
  
- .colour-div{
-    display:flex;
- }
+.myform{
+   margin-bottom:20px;
+}
+.myform button{
+   margin-bottom:20px;
+}
+
  .sector-item{
     width: 20vw;
     height: 20vw;
