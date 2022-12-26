@@ -1,6 +1,8 @@
 body{
     margin: 5%;
     font-size:1em;
+    background-color: darkolivegreen;
+    color:cyan;
  }
 
  #wholeDiv{
@@ -8,11 +10,14 @@ body{
    flex-direction: column;
    max-width: 76vw;
  }
- /*
-button{
-   font-size: 12px;
+ 
+#notifications{
+   background-color:darkgrey;
+   color:yellow;
+   font-weight: bolder;
+   text-align: center;
 }
-*/
+
 #buttonsDiv{
    display:flex;
    justify-content: space-between;

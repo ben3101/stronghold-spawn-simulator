@@ -357,9 +357,17 @@ function selectSH(){
     infoP.innerHTML += '<hr>';
     infoP.innerHTML +=`<br>Stronghold Spawn:<br><br>`;
     for(let troop of sh.Troops){
+        //only display the spawn size next to big and small
+        let spawn = troop.getSpawnType();
+        if(spawn==='medium'){
+            spawn = '';
+        }else{
+            spawn=`(${spawn})`;
+        }
+        
         infoP.innerHTML+=`${troop.getName()}
         ${troop.getSpawnSize().toLocaleString('en-US')}          
-        (${troop.getSpawnType()} spawn)<br>`;
+        ${spawn}<br>`;
     }
 
 }
