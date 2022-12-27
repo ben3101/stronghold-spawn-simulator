@@ -285,6 +285,10 @@ let wzCreated = false;
 let strongholds = [];
 //create the warzone
 createWz();
+//button colour changes
+let normalButton = "black";
+let highlightedButton = "#00ffff5e";
+let selectedButton = "cyan";
 
 //element variables
 const notifications = document.getElementById('notifications');
@@ -294,7 +298,7 @@ const changeOwnerBtn = document.getElementById('change-owner');
 const resetBtn = document.getElementById('reset-wz');
 //store reference to last selected element. Initialise at sh1
 let selectedSH = document.getElementById('Stronghold 1');
-
+selectedSH.click();
 
 //event listeners
 changeOwnerBtn.addEventListener('click', updateSH);
@@ -315,8 +319,15 @@ document.addEventListener('keydown', function(e){
 //function that selects the sh that was clicked on
 //and displays the relevant info below
 function selectSH(){
+
+    //first, check if any previous button was selected
+    if(selectedSH!==""){
+        selectedSH.style.color = normalButton;
+    }
     
     selectedSH = document.getElementById(this.id);
+    selectedSH.style.color = selectedButton;
+    
     
     let id = selectedSH.getAttribute('id');
     console.log(`currently selecting ${selectedSH.id}`);
@@ -406,6 +417,9 @@ function createWz(cols){
         btn.classList.add('ek');
         strongholds[i-1] = new Stronghold(name);
         btn.addEventListener('click', selectSH);
+        //add eventListener for hovering
+        btn.addEventListener('mouseover', hoverOverFunction);
+        btn.addEventListener('mouseout', hoverOutFunction);
 
         //style
         //btnsetAttribute('style', `width:${sqSize}vw;height:${sqSize}vw;background-color:gray;`);
@@ -423,6 +437,23 @@ function resetWz(){
     location.reload();
 }
 
+//change appearance of sh buttons when hovered over
+function hoverOverFunction(){
+    console.log(`Hovering over ${this.name}`)
+    //change text color of button slightly
+    if(selectedSH !== this){
+        //only change it if not selected
+        this.style.color = highlightedButton;
+    }
+}
+
+function hoverOutFunction(){
+    //change the text color of a button back to normal
+    if(selectedSH !== this){
+        //only change it back if not selected
+    this.style.color = normalButton;
+    }
+}
 
 
 

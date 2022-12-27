@@ -1,11 +1,13 @@
 body{
-    margin: 5%;
-    font-size:1em;
-    background-color: darkolivegreen;
-    color:cyan;
+   margin: 5%;
+   font-size:1em;
+   background-color: darkolivegreen;
+   color:cyan;
+   display: flex;
+   justify-content: center;
  }
 button{
-    color:black;
+   color:black;
 }
 
  #wholeDiv{
@@ -42,13 +44,10 @@ button #reset-wz{
     flex-wrap: wrap;
     max-width: 76.5vw;
     max-height: 76.5vw;
-    /* max-width: 605px;
-    max-height: 605px; */
     background-color:black;
     gap:0.25vw;
     border:0.25vw solid black;
-    /* gap:2.5px;
-    border:2.5px solid black; */
+    
  }
 
  
@@ -62,14 +61,17 @@ button #reset-wz{
  .sector-item{
     width: 25vw;
     height: 25vw;
-    /* width:200px;
-    height:200px; */
     font-weight: bolder;
     font-size:inherit;
     display:flex;
     justify-content: center;
     align-items: center;
  }
+/*
+ .sector-item:hover{
+   background-color: darkgray;
+}*/
+
  .ek{
 
     background-color:brown;
@@ -84,21 +86,20 @@ button #reset-wz{
 
     background-color:red;
  }
+
+
  
  #infoDiv p{
     max-width: 76vw;
     border:0.25vw solid black;
     background-color: black;
     color:antiquewhite;
-    /* max-width: 605px;
-    border:2.5px solid black; */
+    padding:5px;
  }
  
 
  
- /*
- .grid-item:hover{
-     background-color: darkgray;
- }
- */
+ 
+ 
+ 
  
