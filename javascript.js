@@ -1,5 +1,5 @@
 //classes
-//Troops:
+//Troop:
 class Troop{
     name = "";
     spawnType = "";
@@ -29,17 +29,17 @@ class Troop{
     }
 }
 
-//Strongholds:
+//Stronghold:
 class Stronghold{
 
     name;
     //percentage of Warzone Points in the sector at time of SH conquer
     wzpMultiplier;
-    //base spawn size = 5b, min = 100m
+    //base spawn size = 5b, min = 100m, used in spawn calculations
     baseAmount = 5000000000;
     minAmount = 100000000;
     owner = "Evil King";
-    //WZP value of it
+    //total WZP in the sector
     shWzp = 500000;
 
     //the Troops that will be in every SH
@@ -71,9 +71,10 @@ class Stronghold{
     }
 
     // SH methods
+    //(some have been adjusted for UI, others are just for use in the console.)
     assignType(){
         //assign small, medium or big to troop's spawn type
-        //-set all to medium initally
+        //-set all to medium initially
         //-pick 1 random to be small, and 1 big
         
         for(let troop of this.Troops){
@@ -319,23 +320,20 @@ document.addEventListener('keydown', function(e){
 //function that selects the sh that was clicked on
 //and displays the relevant info below
 function selectSH(){
-
     //first, check if any previous button was selected
     if(selectedSH!==""){
+        //revert previously selected button to normal
         selectedSH.style.color = normalButton;
     }
-    
+    //save reference of new selected button and update its colour
     selectedSH = document.getElementById(this.id);
     selectedSH.style.color = selectedButton;
     
     
     let id = selectedSH.getAttribute('id');
-    console.log(`currently selecting ${selectedSH.id}`);
+    // console.log(`currently selecting ${selectedSH.id}`);
     let index = id.substring(id.length-1);
     sh = strongholds[index-1];
-
-    //strongholds[index-1].getShWzp();
-    //infoP.textContent = strongholds[index-1].getShinfo();
 
     //calculate the WZP that will be displayed in the sector
     let dragonWzp = 0;
@@ -349,6 +347,7 @@ function selectSH(){
         dragonWzp = sh.shWzp - phoenixWzp;
     }
 
+    //Update the displayed information about selected sector/SH
     //sh name
     infoP.innerHTML = sh.getName();
     infoP.innerHTML += '<br><br>';
@@ -383,8 +382,9 @@ function selectSH(){
 
 }
 
+//method to change SH ownership
+//changing the owner to the same faction will simply re-roll sh spawn
 function updateSH(){
-    
     //locate the sh in the strongholds array and store a reference to it
     let id = selectedSH.getAttribute('id');
     let index = id.substring(id.length-1);
@@ -402,7 +402,6 @@ function createWz(cols){
         //if it already exists, do nothing
         return;
     }
-
     //create a grid of 9 square sectors
     for(let i=1; i<=9; i++){
         //create divs, give them an id and class
@@ -421,25 +420,20 @@ function createWz(cols){
         btn.addEventListener('mouseover', hoverOverFunction);
         btn.addEventListener('mouseout', hoverOutFunction);
 
-        //style
-        //btnsetAttribute('style', `width:${sqSize}vw;height:${sqSize}vw;background-color:gray;`);
-
-        //add eventListener for hovering
-        //div.addEventListener('mouseover', hoverFunction);
-
         //add them to the main div
         mainDiv.appendChild(btn);
     }
     wzCreated = true;
 }
 
+//function for reset button, reloads page
 function resetWz(){
     location.reload();
 }
 
 //change appearance of sh buttons when hovered over
 function hoverOverFunction(){
-    console.log(`Hovering over ${this.name}`)
+    // console.log(`Hovering over ${this.name}`)
     //change text color of button slightly
     if(selectedSH !== this){
         //only change it if not selected
