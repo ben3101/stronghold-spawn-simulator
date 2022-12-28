@@ -390,7 +390,7 @@ function updateSH(){
     let index = id.substring(id.length-1);
     sh = strongholds[index-1];
     //conquer it
-    let wzp = document.getElementById('wzp').value;
+    let wzp = document.getElementById('wzp-input').value;
     sh.conquerSH(changeOwnerMenu.value, wzp);
     //click the button with .click() to select it again and show updated info
     document.getElementById(id).click();

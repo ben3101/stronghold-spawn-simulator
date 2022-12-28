@@ -23,16 +23,20 @@
     <p id="notifications">[Warzone Initialised]</p>
     <!-- inputs -->
     <form class="myform">
+        <div>
         <label for="owner">Change Owner: </label>
         <select name="ownerSelect" size="1" id="owner">
             <option value="dragon">Dragon</option>
             <option value="phoenix">Phoenix</option>
             <option value="evil king">Evil King</option>
         </select>
+        </div>
+        <div>
         <form>
         <label for="wzp">Warzone Point %: </label>
-        <input type="number" max="100" id="wzp" value="50"></input>
+        <input id="wzp-input" type="number" min="0" max="100" id="wzp" value="50"></input>
         </form>
+        </div>
         <div id="buttonsDiv">
         <button id="change-owner">Update Owner</button>
         <button id="reset-wz">Reset Warzone</button>
